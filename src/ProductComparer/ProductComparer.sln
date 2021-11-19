@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ProductComparer", "ProductComparer\ProductComparer.fsproj", "{D084830B-DA8A-49D5-BC58-492923F6DA39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D084830B-DA8A-49D5-BC58-492923F6DA39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D084830B-DA8A-49D5-BC58-492923F6DA39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D084830B-DA8A-49D5-BC58-492923F6DA39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D084830B-DA8A-49D5-BC58-492923F6DA39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,29 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./src/ProductComparer/
+    - name: Generate phony stelorder file
+      run: touch ./src/ProductComparer/ProductComparer/stelorder.key.txt
+    - name: Generate phony infortisa file
+      run: touch ./src/ProductComparer/ProductComparer/infortisa.key.txt
+    - name: Build
+      run: dotnet build --no-restore ./src/ProductComparer/ProductComparer/
+    - name: Test
+      run: dotnet test --no-build --verbosity normal ./src/ProductComparer/ProductComparer/

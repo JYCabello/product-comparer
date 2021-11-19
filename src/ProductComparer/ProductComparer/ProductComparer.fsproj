@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Singletons.fs" />
+        <Compile Include="Models.fs" />
+        <Compile Include="Providers\Provider.fs" />
+        <Compile Include="Providers\Infortisa.fs" />
+        <Compile Include="Providers\ProviderFactory.fs" />
+        <Compile Include="Csv.fs" />
+        <Compile Include="StelOrders.fs" />
+        <Compile Include="Program.fs" />
+        <Content Include="stelorder.key.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="infortisa.key.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CsvHelper" Version="27.2.0" />
+      <PackageReference Include="FsToolkit.ErrorHandling" Version="2.10.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+</Project>

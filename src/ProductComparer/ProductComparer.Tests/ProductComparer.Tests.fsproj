@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <Compile Include="SummaryBuilder.fs" />
+        <Compile Include="GetChanged.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

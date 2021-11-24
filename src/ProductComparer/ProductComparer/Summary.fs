@@ -1,8 +1,8 @@
-﻿module ProductComparer.SummaryBuilder
+﻿module ProductComparer.Summary
 
 open ProductComparer.Models
 
-let getFolder (provProds: ProviderProduct list) =
+let getBuilder (provProds: ProviderProduct list) =
   let folder (acc: ProductsSummary) (p: StelProduct) =
     let provided =
       provProds
@@ -26,3 +26,11 @@ let getFolder (provProds: ProviderProduct list) =
             acc.ProvidersNotUsed
             |> List.filter (fun prv -> not (prv = pp.ProviderName)) }
   folder
+
+let increased result =
+  result.ProductsFound
+  |> List.filter (fun p -> p.NewPrice > p.OldPrice)
+
+let decreased result =
+  result.ProductsFound
+  |> List.filter (fun p -> p.NewPrice < p.OldPrice)

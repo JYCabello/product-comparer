@@ -40,7 +40,7 @@ type ProvidedProduct =
     NewPrice: decimal
     Barcode: string }
 
-type ProductComparisonSummary =
+type ProductsSummary =
   { Products: StelProduct list
     ProvidersNotUsed: string list
     ProductsFound: ProvidedProduct list }

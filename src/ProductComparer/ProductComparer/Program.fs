@@ -35,7 +35,7 @@ let handleProducts (products: StelProduct list) =
 
     let results =
       (initialResults, products)
-      ||> List.fold (ProductProcessor.getFolder providedProducts)
+      ||> List.fold (SummaryBuilder.getFolder providedProducts)
 
     do! Csv.write products "productos.csv"
 

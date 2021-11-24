@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="ProductProcessorFolder.fs" />
+        <Compile Include="SummaryBuilder.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

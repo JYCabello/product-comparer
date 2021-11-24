@@ -1,9 +1,9 @@
-﻿module ProductComparer.ProductProcessor
+﻿module ProductComparer.SummaryBuilder
 
 open ProductComparer.Models
 
 let getFolder (provProds: ProviderProduct list) =
-  let folder (acc: ProductComparisonSummary) (p: StelProduct) =
+  let folder (acc: ProductsSummary) (p: StelProduct) =
     let provided =
       provProds
       |> List.filter (fun pp -> pp.Barcode = p.Barcode)

@@ -28,7 +28,7 @@ let ``finds the product`` () =
 
   let summary =
     (initialResult, stelProducts)
-    ||> List.fold (ProductProcessor.getFolder providerProducts)
+    ||> List.fold (SummaryBuilder.getFolder providerProducts)
 
   Assert.Contains(summary.Products, fun p -> p.Barcode = "A")
   Assert.Contains(summary.Products, fun p -> p.Barcode = "B")
@@ -60,7 +60,7 @@ let ``contains unused provider`` () =
 
   let summary =
     (initialResult, stelProducts)
-    ||> List.fold (ProductProcessor.getFolder providerProducts)
+    ||> List.fold (SummaryBuilder.getFolder providerProducts)
 
   Assert.Contains(summary.ProvidersNotUsed, fun p -> p = "pear")
   Assert.DoesNotContain(summary.ProvidersNotUsed, fun p -> p = "banana")

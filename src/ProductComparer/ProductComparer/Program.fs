@@ -38,25 +38,10 @@ let handleProducts (products: StelProduct list) =
       ||> List.fold (Summary.getBuilder providedProducts)
 
     do! Csv.write products "productos.csv"
-
     do! Csv.write (Summary.increased summary) "precios-incrementados.csv"
-
     do! Csv.write (Summary.decreased summary) "precios-reducidos.csv"
-
-    let notFound =
-      products
-      |> List.filter
-           (fun p ->
-             summary.ProductsFound
-             |> List.exists (fun pf -> pf.Barcode = p.Barcode)
-             |> not)
-
-    do! Csv.write notFound "productos-no-encontrados.csv"
-
-    do!
-      match summary.ProvidersNotUsed with
-      | notUsed when notUsed.Length > 0 -> Csv.write notUsed "proveedores-no-usados.csv"
-      | _ -> async { return Ok() }
+    do! Csv.write (Summary.notFound products summary) "productos-no-encontrados.csv"
+    do! Csv.write summary.ProvidersNotUsed "proveedores-no-usados.csv"
 
     return ()
   }

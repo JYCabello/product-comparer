@@ -25,12 +25,21 @@ let getBuilder (provProds: ProviderProduct list) =
           ProvidersNotUsed =
             acc.ProvidersNotUsed
             |> List.filter (fun prv -> not (prv = pp.ProviderName)) }
+
   folder
 
-let increased result =
-  result.ProductsFound
+let increased summary =
+  summary.ProductsFound
   |> List.filter (fun p -> p.NewPrice > p.OldPrice)
 
-let decreased result =
-  result.ProductsFound
+let decreased summary =
+  summary.ProductsFound
   |> List.filter (fun p -> p.NewPrice < p.OldPrice)
+
+let notFound (products: StelProduct list) summary =
+  products
+  |> List.filter
+       (fun p ->
+         summary.ProductsFound
+         |> List.exists (fun pf -> pf.Barcode = p.Barcode)
+         |> not)

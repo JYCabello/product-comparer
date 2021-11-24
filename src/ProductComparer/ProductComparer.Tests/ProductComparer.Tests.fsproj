@@ -10,6 +10,7 @@
     <ItemGroup>
         <Compile Include="SummaryBuilder.fs" />
         <Compile Include="GetChanged.fs" />
+        <Compile Include="NotFound.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

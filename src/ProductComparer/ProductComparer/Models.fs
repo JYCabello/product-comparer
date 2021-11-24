@@ -33,6 +33,18 @@ type CleanBarcode =
 
 type FailedFile = { FileName: string; Error: string }
 
+type ProvidedProduct =
+  { Name: string
+    Provider: string
+    OldPrice: decimal
+    NewPrice: decimal
+    Barcode: string }
+
+type ProductComparisonSummary =
+  { Products: StelProduct list
+    ProvidersNotUsed: string list
+    ProductsFound: ProvidedProduct list }
+
 type Errors =
   | StelOrderNotReachable of string
   | CouldNotWriteCsv of FailedFile

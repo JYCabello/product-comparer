@@ -8,6 +8,7 @@
     <ItemGroup>
         <Compile Include="Singletons.fs" />
         <Compile Include="Models.fs" />
+        <Compile Include="ProductProcessor.fs" />
         <Compile Include="Providers\Provider.fs" />
         <Compile Include="Providers\Infortisa.fs" />
         <Compile Include="Providers\ProviderFactory.fs" />

@@ -2,18 +2,6 @@ open ProductComparer
 open FsToolkit.ErrorHandling
 open ProductComparer.Models
 
-type ProvidedProduct =
-  { Name: string
-    Provider: string
-    OldPrice: decimal
-    NewPrice: decimal
-    Barcode: string }
-
-type Results =
-  { Products: StelProduct list
-    ProvidersNotUsed: string list
-    ProductsFound: ProvidedProduct list }
-
 
 let provProd (product: StelProduct) =
   async {
@@ -47,29 +35,7 @@ let handleProducts (products: StelProduct list) =
 
     let results =
       (initialResults, products)
-      ||> List.fold
-            (fun acc p ->
-              let provided =
-                providedProducts
-                |> List.filter (fun pp -> pp.Barcode = p.Barcode)
-                |> List.sortBy (fun pp -> pp.Price)
-                |> List.tryHead
-
-              match provided with
-              | None -> acc
-              | Some pp ->
-                let cp =
-                  { Barcode = pp.Barcode
-                    OldPrice = p.PurchasePrice
-                    NewPrice = pp.Price
-                    Provider = pp.ProviderName
-                    Name = p.Name }
-
-                { acc with
-                    ProductsFound = cp :: acc.ProductsFound
-                    ProvidersNotUsed =
-                      acc.ProvidersNotUsed
-                      |> List.filter (fun prv -> not (prv = pp.ProviderName)) })
+      ||> List.fold (ProductProcessor.getFolder providedProducts)
 
     do! Csv.write products "productos.csv"
 

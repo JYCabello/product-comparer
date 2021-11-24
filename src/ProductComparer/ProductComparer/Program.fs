@@ -14,7 +14,7 @@ let provProd (product: StelProduct) =
       prods
       |> Array.choose id
       |> Array.toList
-      |> List.map CleanBarcode.Do
+      |> List.map ModelNormalizer.Do
   }
 
 let handleProducts (products: StelProduct list) =

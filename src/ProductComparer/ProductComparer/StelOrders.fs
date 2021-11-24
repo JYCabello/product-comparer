@@ -67,7 +67,7 @@ let getAllProducts () =
       return
         products
         |> List.filter (fun p -> not (String.IsNullOrWhiteSpace(p.Barcode)))
-        |> List.map CleanBarcode.Do
+        |> List.map ModelNormalizer.Do
     }
 
   let rec getBatch (products: StelProduct list) batchNo =

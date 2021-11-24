@@ -17,7 +17,7 @@ type ProviderProduct =
 [<CLIMutable>]
 type InfortisaProduct = { EANUpc: string; Price: decimal }
 
-type CleanBarcode =
+type ModelNormalizer =
   static member Do(sp: StelProduct) =
     { sp with
         Barcode = sp.Barcode.Trim().ToUpperInvariant() }

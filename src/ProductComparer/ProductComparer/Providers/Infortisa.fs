@@ -39,7 +39,7 @@ let allInfortisaProductsTask =
 
         return
           JsonConvert.DeserializeObject<InfortisaProduct list>(body)
-          |> List.map CleanBarcode.Do
+          |> List.map ModelNormalizer.Do
       with
       | _ -> return []
     }

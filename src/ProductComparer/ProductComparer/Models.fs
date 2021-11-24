@@ -9,6 +9,27 @@ type StelProduct =
     PurchasePrice: decimal
     Name: string }
 
+type ProviderProduct =
+  { Barcode: string
+    Price: decimal
+    ProviderName: string }
+
+[<CLIMutable>]
+type InfortisaProduct = { EANUpc: string; Price: decimal }
+
+type CleanBarcode =
+  static member Do(sp: StelProduct) =
+    { sp with
+        Barcode = sp.Barcode.Trim().ToUpperInvariant() }
+
+  static member Do(sp: ProviderProduct) =
+    { sp with
+        Barcode = sp.Barcode.Trim().ToUpperInvariant() }
+
+  static member Do(sp: InfortisaProduct) =
+    { sp with
+        EANUpc = sp.EANUpc.Trim().ToUpperInvariant() }
+
 
 type FailedFile = { FileName: string; Error: string }
 

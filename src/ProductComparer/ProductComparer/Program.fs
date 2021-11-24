@@ -26,10 +26,7 @@ let provProd (product: StelProduct) =
       prods
       |> Array.choose id
       |> Array.toList
-      |> List.map
-           (fun p ->
-             { p with
-                 Barcode = p.Barcode.Trim().ToUpperInvariant() })
+      |> List.map CleanBarcode.Do
   }
 
 let handleProducts (products: StelProduct list) =

@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="ResultCollector.fs" />
         <Compile Include="SummaryBuilder.fs" />
         <Compile Include="GetChanged.fs" />
         <Compile Include="NotFound.fs" />

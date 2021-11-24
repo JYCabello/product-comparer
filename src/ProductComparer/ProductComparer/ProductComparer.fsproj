@@ -7,6 +7,7 @@
 
     <ItemGroup>
         <Compile Include="Singletons.fs" />
+        <Compile Include="ResultCollector.fs" />
         <Compile Include="Models.fs" />
         <Compile Include="Summary.fs" />
         <Compile Include="Providers\Provider.fs" />

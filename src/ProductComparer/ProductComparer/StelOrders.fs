@@ -52,17 +52,9 @@ let getAllProducts () =
         |> List.map (fun p -> fetchPage p |> Async.StartChild)
         |> Async.Parallel
 
-      let! resultArray = fibers |> Async.Parallel
+      let! productResults = fibers |> Async.Parallel
 
-      let! products =
-        (Ok [], resultArray)
-        ||> Array.fold
-              (fun acc rslt ->
-                result {
-                  let! acc = acc
-                  let! rslt = rslt
-                  return acc @ rslt
-                })
+      let! products = productResults |> ResultCollector.collect
 
       return
         products

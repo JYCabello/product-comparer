@@ -25,14 +25,14 @@ let write items (fileName: string) =
     cfg
 
   match items with
-  | its when (its |> Seq.length) < 1 -> asyncResult { return () }
+  | [] -> asyncResult { return () }
   | _ ->
     asyncResult {
       try
         Directory.CreateDirectory folderName |> ignore
 
         use writer =
-          new StreamWriter(Path.Combine(folderName, fileName))
+          new StreamWriter(Path.Combine(folderName, fileName), true, Encoding.UTF8)
 
         use csv = new CsvWriter(writer, config)
 

@@ -3,6 +3,15 @@
 open Newtonsoft.Json
 
 [<CLIMutable>]
+type Settings =
+  { StelOrderKey: string
+    InfortisaKey: string }
+  member this.InfortisaKeySafe =
+    match this.InfortisaKey with
+    | null -> None
+    | _ -> Some this.InfortisaKey
+
+[<CLIMutable>]
 type StelProduct =
   { Barcode: string
     [<JsonProperty("purchase-price")>]

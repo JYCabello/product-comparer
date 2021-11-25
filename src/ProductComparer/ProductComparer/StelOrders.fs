@@ -1,15 +1,12 @@
 ﻿module ProductComparer.StelOrders
 
 open System
-open System.IO
 open System.Net.Http
 open Newtonsoft.Json
 open FsToolkit.ErrorHandling
 open ProductComparer.Models
 open ProductComparer.Singletons
 
-let apiKey =
-  File.ReadAllLines("stelorder.key.txt").[0]
 
 let fetchUrl<'a> (url: string) =
   asyncResult {
@@ -17,7 +14,7 @@ let fetchUrl<'a> (url: string) =
       use request =
         new HttpRequestMessage(HttpMethod.Get, url)
 
-      request.Headers.Add("APIKEY", apiKey)
+      request.Headers.Add("APIKEY", settings.StelOrderKey)
 
       let! response = httpClient.SendAsync request
 

@@ -6,9 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Singletons.fs" />
         <Compile Include="ResultCollector.fs" />
         <Compile Include="Models.fs" />
+        <Compile Include="Singletons.fs" />
         <Compile Include="Summary.fs" />
         <Compile Include="Providers\Provider.fs" />
         <Compile Include="Providers\Infortisa.fs" />
@@ -16,10 +16,7 @@
         <Compile Include="Csv.fs" />
         <Compile Include="StelOrders.fs" />
         <Compile Include="Program.fs" />
-        <Content Include="stelorder.key.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="infortisa.key.txt">
+        <Content Include="appsettings.json">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>

@@ -25,7 +25,6 @@ let allInfortisaProductsTask =
           new HttpRequestMessage(HttpMethod.Get, "http://api.infortisa.com/api/Product/Get")
 
         request.Headers.Add("Authorization-Token", key)
-        request.Headers.Add("Accept", "application/json")
 
         let! response = httpClient.SendAsync request
         let! body = response.Content.ReadAsStringAsync()

@@ -4,6 +4,7 @@ open System
 open System.Collections.Generic
 open System.Globalization
 open System.IO
+open System.Text
 open System.Threading
 open CsvHelper
 open CsvHelper.Configuration
@@ -20,6 +21,7 @@ let write items (fileName: string) =
       CsvConfiguration(CultureInfo.InvariantCulture)
 
     cfg.HasHeaderRecord <- true
+    cfg.Encoding <- Encoding.UTF8
     cfg
 
   match items with

@@ -21,7 +21,9 @@ let ``returns not found products`` () =
 
   let initialResult =
     { Products = stelProducts
-      ProvidersNotUsed = [ "banana"; "pear" ]
+      ProvidersNotUsed =
+        [ { Name = "banana" }
+          { Name = "pear" } ]
       ProductsFound = [] }
 
   let summary =

@@ -21,7 +21,7 @@ let ``finds the product`` () =
 
   let initialResult =
     { Products = stelProducts
-      ProvidersNotUsed = [ "banana" ]
+      ProvidersNotUsed = [ { Name = "banana" } ]
       ProductsFound = [] }
 
   let summary =
@@ -51,12 +51,14 @@ let ``contains unused provider`` () =
 
   let initialResult =
     { Products = stelProducts
-      ProvidersNotUsed = [ "banana"; "pear" ]
+      ProvidersNotUsed =
+        [ { Name = "banana" }
+          { Name = "pear" } ]
       ProductsFound = [] }
 
   let summary =
     (initialResult, stelProducts)
     ||> List.fold (Summary.getBuilder providerProducts)
 
-  Assert.Contains(summary.ProvidersNotUsed, (fun p -> p = "pear"))
-  Assert.DoesNotContain(summary.ProvidersNotUsed, (fun p -> p = "banana"))
+  Assert.Contains(summary.ProvidersNotUsed, (fun p -> p.Name = "pear"))
+  Assert.DoesNotContain(summary.ProvidersNotUsed, (fun p -> p.Name = "banana"))

@@ -37,7 +37,7 @@ let write items (fileName: string) =
         use csv = new CsvWriter(writer, config)
 
         return!
-          csv.WriteRecordsAsync((items: IEnumerable<'a>), Unchecked.defaultof<CancellationToken>)
+          csv.WriteRecordsAsync(items |> List.toSeq, Unchecked.defaultof<CancellationToken>)
           |> Async.AwaitTask
       with
       | ex ->

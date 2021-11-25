@@ -30,7 +30,7 @@ let handleProducts (products: StelProduct list) =
       { Products = products
         ProvidersNotUsed =
           ProviderFactory.providers
-          |> List.map (fun p -> p.name)
+          |> List.map (fun p -> { Name = p.name })
         ProductsFound = [] }
 
     let summary =

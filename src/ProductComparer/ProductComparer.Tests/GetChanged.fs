@@ -21,7 +21,9 @@ let ``finds lowest of increased prices`` () =
 
   let initialResult =
     { Products = stelProducts
-      ProvidersNotUsed = [ "banana"; "pear" ]
+      ProvidersNotUsed =
+        [ { Name = "banana" }
+          { Name = "banana" } ]
       ProductsFound = [] }
 
   let summary =
@@ -51,7 +53,9 @@ let ``finds decreased prices`` () =
 
   let initialResult =
     { Products = stelProducts
-      ProvidersNotUsed = [ "banana"; "pear" ]
+      ProvidersNotUsed =
+        [ { Name = "banana" }
+          { Name = "pear" } ]
       ProductsFound = [] }
 
   let summary =

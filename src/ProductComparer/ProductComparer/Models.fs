@@ -49,9 +49,11 @@ type ProvidedProduct =
     NewPrice: decimal
     Barcode: string }
 
+type ProviderInfo = { Name: string }
+
 type ProductsSummary =
   { Products: StelProduct list
-    ProvidersNotUsed: string list
+    ProvidersNotUsed: ProviderInfo list
     ProductsFound: ProvidedProduct list }
 
 type Errors =

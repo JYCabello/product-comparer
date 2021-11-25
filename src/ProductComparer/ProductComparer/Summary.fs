@@ -24,7 +24,7 @@ let getBuilder (provProds: ProviderProduct list) =
           ProductsFound = cp :: acc.ProductsFound
           ProvidersNotUsed =
             acc.ProvidersNotUsed
-            |> List.filter (fun prv -> not (prv = pp.ProviderName)) }
+            |> List.filter (fun prv -> not (prv.Name = pp.ProviderName)) }
 
   folder
 

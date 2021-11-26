@@ -2,18 +2,6 @@ open ProductComparer
 open FsToolkit.ErrorHandling
 open ProductComparer.Models
 
-type ProvidedProduct =
-  { Name: string
-    Provider: string
-    OldPrice: decimal
-    NewPrice: decimal
-    Barcode: string }
-
-type Results =
-  { Products: StelProduct list
-    ProvidersNotUsed: string list
-    ProductsFound: ProvidedProduct list }
-
 
 let provProd (product: StelProduct) =
   async {
@@ -26,10 +14,7 @@ let provProd (product: StelProduct) =
       prods
       |> Array.choose id
       |> Array.toList
-      |> List.map
-           (fun p ->
-             { p with
-                 Barcode = p.Barcode.Trim().ToUpperInvariant() })
+      |> List.map ModelNormalizer.Do
   }
 
 let handleProducts (products: StelProduct list) =
@@ -45,63 +30,18 @@ let handleProducts (products: StelProduct list) =
       { Products = products
         ProvidersNotUsed =
           ProviderFactory.providers
-          |> List.map (fun p -> p.name)
+          |> List.map (fun p -> { Name = p.name })
         ProductsFound = [] }
 
-    let results =
+    let summary =
       (initialResults, products)
-      ||> List.fold
-            (fun acc p ->
-              let provided =
-                providedProducts
-                |> List.filter (fun pp -> pp.Barcode = p.Barcode)
-                |> List.sortBy (fun pp -> pp.Price)
-                |> List.tryHead
-
-              match provided with
-              | None -> acc
-              | Some pp ->
-                let cp =
-                  { Barcode = pp.Barcode
-                    OldPrice = p.PurchasePrice
-                    NewPrice = pp.Price
-                    Provider = pp.ProviderName
-                    Name = p.Name }
-
-                { acc with
-                    ProductsFound = cp :: acc.ProductsFound
-                    ProvidersNotUsed =
-                      acc.ProvidersNotUsed
-                      |> List.filter (fun prv -> not (prv = pp.ProviderName)) })
+      ||> List.fold (Summary.getBuilder providedProducts)
 
     do! Csv.write products "productos.csv"
-
-    let increased =
-      results.ProductsFound
-      |> List.filter (fun p -> p.NewPrice > p.OldPrice)
-
-    do! Csv.write increased "precios-incrementados.csv"
-
-    let reduced =
-      results.ProductsFound
-      |> List.filter (fun p -> p.NewPrice < p.OldPrice)
-
-    do! Csv.write reduced "precios-reducidos.csv"
-
-    let notFound =
-      products
-      |> List.filter
-           (fun p ->
-             results.ProductsFound
-             |> List.exists (fun pf -> pf.Barcode = p.Barcode)
-             |> not)
-
-    do! Csv.write notFound "productos-no-encontrados.csv"
-
-    do!
-      match results.ProvidersNotUsed with
-      | notUsed when notUsed.Length > 0 -> Csv.write notUsed "proveedores-no-usados.csv"
-      | _ -> async { return Ok() }
+    do! Csv.write (summary |> Summary.increased) "precios-incrementados.csv"
+    do! Csv.write (summary |> Summary.decreased) "precios-reducidos.csv"
+    do! Csv.write (summary |> Summary.notFound) "productos-no-encontrados.csv"
+    do! Csv.write summary.ProvidersNotUsed "proveedores-no-usados.csv"
 
     return ()
   }

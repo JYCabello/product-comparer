@@ -351,3 +351,4 @@ MigrationBackup/
 
 **/.idea/*
 **.key.txt
+**/appsettings.json

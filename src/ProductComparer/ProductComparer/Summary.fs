@@ -36,8 +36,8 @@ let decreased summary =
   summary.ProductsFound
   |> List.filter (fun p -> p.NewPrice < p.OldPrice)
 
-let notFound (products: StelProduct list) summary =
-  products
+let notFound summary =
+  summary.Products
   |> List.filter
        (fun p ->
          summary.ProductsFound

@@ -38,9 +38,9 @@ let handleProducts (products: StelProduct list) =
       ||> List.fold (Summary.getBuilder providedProducts)
 
     do! Csv.write products "productos.csv"
-    do! Csv.write (Summary.increased summary) "precios-incrementados.csv"
-    do! Csv.write (Summary.decreased summary) "precios-reducidos.csv"
-    do! Csv.write (Summary.notFound products summary) "productos-no-encontrados.csv"
+    do! Csv.write (summary |> Summary.increased) "precios-incrementados.csv"
+    do! Csv.write (summary |> Summary.decreased) "precios-reducidos.csv"
+    do! Csv.write (summary |> Summary.notFound) "productos-no-encontrados.csv"
     do! Csv.write summary.ProvidersNotUsed "proveedores-no-usados.csv"
 
     return ()

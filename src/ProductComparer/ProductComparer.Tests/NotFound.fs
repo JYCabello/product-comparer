@@ -30,7 +30,7 @@ let ``returns not found products`` () =
     (initialResult, stelProducts)
     ||> List.fold (Summary.getBuilder providerProducts)
 
-  let notFound = Summary.notFound stelProducts summary
+  let notFound = summary |> Summary.notFound
 
   Assert.Contains(notFound, (fun p -> p.Barcode = "B"))
   Assert.DoesNotContain(notFound, (fun p -> p.Barcode = "A"))

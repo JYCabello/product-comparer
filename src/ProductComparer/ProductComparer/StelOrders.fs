@@ -37,7 +37,7 @@ let getAllProducts () =
   let batchSize = 10
 
   let fetchPage pageNo =
-    fetchUrl<StelProduct list> <| prodsUrl pageNo
+    fetchUrl<OwnProduct list> <| prodsUrl pageNo
 
   let fetchPageBatch batchNo =
     asyncResult {
@@ -59,7 +59,7 @@ let getAllProducts () =
         |> List.map ModelNormalizer.Do
     }
 
-  let rec getBatch (products: StelProduct list) batchNo =
+  let rec getBatch products batchNo =
     asyncResult {
       let! prods = fetchPageBatch batchNo
 

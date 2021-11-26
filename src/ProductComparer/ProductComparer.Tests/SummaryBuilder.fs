@@ -11,7 +11,7 @@ let ``finds the product`` () =
         Price = 10M
         ProviderName = "banana" } ]
 
-  let stelProducts: StelProduct list =
+  let stelProducts: OwnProduct list =
     [ { Barcode = "A"
         PurchasePrice = 9.99M
         Name = "Pen drive 32GB" }
@@ -41,7 +41,7 @@ let ``contains unused provider`` () =
         Price = 10M
         ProviderName = "banana" } ]
 
-  let stelProducts: StelProduct list =
+  let stelProducts: OwnProduct list =
     [ { Barcode = "A"
         PurchasePrice = 9.99M
         Name = "Pen drive 32GB" }

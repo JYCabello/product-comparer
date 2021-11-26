@@ -3,16 +3,35 @@
 open Newtonsoft.Json
 
 [<CLIMutable>]
+type SettingsDto =
+  { StelOrderKey: string
+    InfortisaKey: string
+    DmiUsername: string
+    DmiPassword: string }
+
 type Settings =
   { StelOrderKey: string
-    InfortisaKey: string }
-  member this.InfortisaKeySafe =
-    match this.InfortisaKey with
-    | null -> None
-    | _ -> Some this.InfortisaKey
+    InfortisaKey: string option
+    DmiUsername: string option
+    DmiPassword: string option }
+  static member from(dto: SettingsDto) : Settings =
+    { StelOrderKey = dto.StelOrderKey
+      InfortisaKey =
+        match dto.InfortisaKey with
+        | null -> None
+        | key -> Some key
+      DmiUsername =
+        match dto.DmiUsername with
+        | null -> None
+        | username -> Some username
+      DmiPassword =
+        match dto.DmiPassword with
+        | null -> None
+        | password -> Some password }
+
 
 [<CLIMutable>]
-type StelProduct =
+type OwnProduct =
   { Barcode: string
     [<JsonProperty("purchase-price")>]
     PurchasePrice: decimal
@@ -27,7 +46,7 @@ type ProviderProduct =
 type InfortisaProduct = { EANUpc: string; Price: decimal }
 
 type ModelNormalizer =
-  static member Do(sp: StelProduct) =
+  static member Do(sp: OwnProduct) =
     { sp with
         Barcode = sp.Barcode.Trim().ToUpperInvariant() }
 
@@ -52,7 +71,7 @@ type ProvidedProduct =
 type ProviderInfo = { Name: string }
 
 type ProductsSummary =
-  { Products: StelProduct list
+  { Products: OwnProduct list
     ProvidersNotUsed: ProviderInfo list
     ProductsFound: ProvidedProduct list }
 

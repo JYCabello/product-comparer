@@ -12,4 +12,5 @@ let httpClient =
   client
 
 let settings =
-  JsonConvert.DeserializeObject<Settings>(File.ReadAllText("appsettings.json"))
+  JsonConvert.DeserializeObject<SettingsDto>(File.ReadAllText("appsettings.json"))
+  |> Settings.from

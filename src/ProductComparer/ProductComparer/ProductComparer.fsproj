@@ -11,6 +11,7 @@
         <Compile Include="Singletons.fs" />
         <Compile Include="Summary.fs" />
         <Compile Include="Providers\Provider.fs" />
+        <Compile Include="Providers\Dmi.fs" />
         <Compile Include="Providers\Infortisa.fs" />
         <Compile Include="Providers\ProviderFactory.fs" />
         <Compile Include="Csv.fs" />
@@ -25,6 +26,10 @@
       <PackageReference Include="CsvHelper" Version="27.2.0" />
       <PackageReference Include="FsToolkit.ErrorHandling" Version="2.10.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ProductComparer.DMIPort\ProductComparer.DMIPort.csproj" />
     </ItemGroup>
 
 </Project>

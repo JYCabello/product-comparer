@@ -14,9 +14,9 @@ let searchUrl searchTerm pageNo =
 
 // La API de infortisa muere a la que haces más de veinte búsquedas en un corto periodo de tiempo
 // por suerte, no tienen demasiados productos (<8k) así que simplemente se puede pedir el paquete completo
-// (correcto, no pagina) y dejar en memoria solamente los datos necesarios.
+// (correcto, no hay paginación) y dejar en memoria solamente los datos necesarios.
 let allInfortisaProductsTask =
-  match settings.InfortisaKeySafe with
+  match settings.InfortisaKey with
   | None -> Task.FromResult<InfortisaProduct list>([])
   | Some key ->
     task {

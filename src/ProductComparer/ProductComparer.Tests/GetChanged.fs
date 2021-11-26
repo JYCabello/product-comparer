@@ -6,7 +6,7 @@ open Xunit
 
 [<Fact>]
 let ``finds lowest of increased prices`` () =
-  let stelProducts: StelProduct list =
+  let stelProducts: OwnProduct list =
     [ { Barcode = "A"
         PurchasePrice = 9.99M
         Name = "Pen drive 32GB" } ]
@@ -38,7 +38,7 @@ let ``finds lowest of increased prices`` () =
 
 [<Fact>]
 let ``finds decreased prices`` () =
-  let stelProducts: StelProduct list =
+  let stelProducts: OwnProduct list =
     [ { Barcode = "A"
         PurchasePrice = 10M
         Name = "Pen drive 32GB" } ]

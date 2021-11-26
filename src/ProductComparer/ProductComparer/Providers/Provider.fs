@@ -3,5 +3,5 @@
 open ProductComparer.Models
 
 type Provider =
-  abstract member get: StelProduct -> Async<ProviderProduct option>
+  abstract member get: OwnProduct -> Async<ProviderProduct option>
   abstract member name: string

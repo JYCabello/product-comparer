@@ -12,7 +12,7 @@ type Settings =
     | _ -> Some this.InfortisaKey
 
 [<CLIMutable>]
-type StelProduct =
+type OwnProduct =
   { Barcode: string
     [<JsonProperty("purchase-price")>]
     PurchasePrice: decimal
@@ -27,7 +27,7 @@ type ProviderProduct =
 type InfortisaProduct = { EANUpc: string; Price: decimal }
 
 type ModelNormalizer =
-  static member Do(sp: StelProduct) =
+  static member Do(sp: OwnProduct) =
     { sp with
         Barcode = sp.Barcode.Trim().ToUpperInvariant() }
 
@@ -52,7 +52,7 @@ type ProvidedProduct =
 type ProviderInfo = { Name: string }
 
 type ProductsSummary =
-  { Products: StelProduct list
+  { Products: OwnProduct list
     ProvidersNotUsed: ProviderInfo list
     ProductsFound: ProvidedProduct list }
 

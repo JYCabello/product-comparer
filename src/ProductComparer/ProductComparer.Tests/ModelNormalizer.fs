@@ -5,7 +5,7 @@ open Xunit
 
 [<Fact>]
 let ``cleans stel product`` () =
-  let stelProduct: StelProduct =
+  let stelProduct: OwnProduct =
     { Barcode = " a-1A "
       PurchasePrice = 1M
       Name = "Product" }

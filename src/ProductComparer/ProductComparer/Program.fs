@@ -3,7 +3,7 @@ open FsToolkit.ErrorHandling
 open ProductComparer.Models
 
 
-let provProd (product: StelProduct) =
+let provProd product =
   async {
     let! prods =
       ProviderFactory.providers
@@ -17,7 +17,7 @@ let provProd (product: StelProduct) =
       |> List.map ModelNormalizer.Do
   }
 
-let handleProducts (products: StelProduct list) =
+let handleProducts products =
   asyncResult {
     let! providedProducts = products |> List.map provProd |> Async.Parallel
 

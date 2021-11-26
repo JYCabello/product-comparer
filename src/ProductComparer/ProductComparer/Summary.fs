@@ -3,7 +3,7 @@
 open ProductComparer.Models
 
 let getBuilder (provProds: ProviderProduct list) =
-  let folder (acc: ProductsSummary) (p: StelProduct) =
+  let folder (acc: ProductsSummary) (p: OwnProduct) =
     let provided =
       provProds
       |> List.filter (fun pp -> pp.Barcode = p.Barcode)

@@ -25,7 +25,7 @@ type Settings =
         | null -> None
         | username -> Some username
       DmiPassword =
-        match dto.DmiUsername with
+        match dto.DmiPassword with
         | null -> None
         | password -> Some password }
 

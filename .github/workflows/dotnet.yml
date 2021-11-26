@@ -24,4 +24,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore ./src/ProductComparer/ProductComparer/
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./src/ProductComparer/ProductComparer/
+      run: dotnet test --no-build --verbosity normal ./src/ProductComparer/

@@ -16,7 +16,10 @@ let credentials =
   option {
     let! userName = settings.DmiUsername
     let! password = settings.DmiPassword
-    return { Username = userName; Password = password }
+
+    return
+      { Username = userName
+        Password = password }
   }
 
 let getProduct (node: XmlNode) : ProviderProduct option =
@@ -27,17 +30,22 @@ let getProduct (node: XmlNode) : ProviderProduct option =
       |> Seq.filter (fun n -> n.InnerText |> String.IsNullOrWhiteSpace |> not)
       |> Seq.map (fun n -> n.InnerText)
       |> Seq.tryHead
+
     let! price =
       node.ChildNodes.Cast<XmlNode>()
       |> Seq.filter (fun n -> n.Name.ToUpperInvariant() = "PRECIO")
-      |> Seq.map (fun n ->
-        match n.InnerText |> Decimal.TryParse with
-        | true, v -> Some v
-        | false, _ -> None
-        )
+      |> Seq.map
+           (fun n ->
+             match n.InnerText |> Decimal.TryParse with
+             | true, v -> Some v
+             | false, _ -> None)
       |> Seq.choose id
       |> Seq.tryHead
-    return { Barcode = barcode.ToUpperInvariant(); Price = price; ProviderName = "DMI" }
+
+    return
+      { Barcode = barcode.ToUpperInvariant()
+        Price = price
+        ProviderName = "DMI" }
   }
 
 let allProductsTask: Task<ProviderProduct list> =
@@ -47,6 +55,7 @@ let allProductsTask: Task<ProviderProduct list> =
     task {
       try
         let! response = ProductComparer.DMIPort.DMIPort.GetAsync(creds.Username, creds.Password)
+
         return
           response.ChildNodes.Cast<XmlNode>()
           |> Seq.map getProduct
@@ -61,9 +70,11 @@ type Dmi() =
     member this.get product =
       asyncOption {
         let! products = allProductsTask
+
         let! product =
           products
           |> List.tryFind (fun p -> p.Barcode = product.Barcode)
+
         return product
       }
 

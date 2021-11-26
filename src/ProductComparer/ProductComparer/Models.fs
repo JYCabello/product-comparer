@@ -3,13 +3,32 @@
 open Newtonsoft.Json
 
 [<CLIMutable>]
+type SettingsDto =
+  { StelOrderKey: string
+    InfortisaKey: string
+    DmiUsername: string
+    DmiPassword: string }
+
 type Settings =
   { StelOrderKey: string
-    InfortisaKey: string }
-  member this.InfortisaKeySafe =
-    match this.InfortisaKey with
-    | null -> None
-    | _ -> Some this.InfortisaKey
+    InfortisaKey: string option
+    DmiUsername: string option
+    DmiPassword: string option }
+  static member from(dto: SettingsDto) : Settings =
+    { StelOrderKey = dto.StelOrderKey
+      InfortisaKey =
+        match dto.InfortisaKey with
+        | null -> None
+        | key -> Some key
+      DmiUsername =
+        match dto.DmiUsername with
+        | null -> None
+        | username -> Some username
+      DmiPassword =
+        match dto.DmiUsername with
+        | null -> None
+        | password -> Some password }
+
 
 [<CLIMutable>]
 type OwnProduct =

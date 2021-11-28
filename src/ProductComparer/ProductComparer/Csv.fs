@@ -1,7 +1,6 @@
 ﻿module ProductComparer.Csv
 
 open System
-open System.Collections.Generic
 open System.Globalization
 open System.IO
 open System.Text
@@ -30,6 +29,8 @@ let write items (fileName: string) =
     asyncResult {
       try
         Directory.CreateDirectory folderName |> ignore
+
+        printfn $"Guardando el fichero %s{fileName}"
 
         use writer =
           new StreamWriter(Path.Combine(folderName, fileName), true, Encoding.UTF8)

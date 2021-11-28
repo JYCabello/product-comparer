@@ -5,10 +5,10 @@ namespace ProductComparer.DMIPort
 {
     public static class DMIPort
     {
-        public static async Task<System.Xml.XmlNode> GetAsync(string username, string password)
+        public static async Task<CatalogoResponseCatalogoResult> GetAsync(string username, string password)
         {
             var client = new PRODUCTOSSoapClient(PRODUCTOSSoapClient.EndpointConfiguration.PRODUCTOSSoap12);
-            return await client.Catalogo_htmlAsync(username, password);
+            return await client.CatalogoAsync(username, password);
         }
     }
 }

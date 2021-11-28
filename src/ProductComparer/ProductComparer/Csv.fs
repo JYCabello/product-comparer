@@ -1,7 +1,6 @@
 ﻿module ProductComparer.Csv
 
 open System
-open System.Collections.Generic
 open System.Globalization
 open System.IO
 open System.Text

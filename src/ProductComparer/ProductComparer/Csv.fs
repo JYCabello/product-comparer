@@ -30,6 +30,8 @@ let write items (fileName: string) =
       try
         Directory.CreateDirectory folderName |> ignore
 
+        printfn $"Guardando el fichero %s{fileName}"
+
         use writer =
           new StreamWriter(Path.Combine(folderName, fileName), true, Encoding.UTF8)
 

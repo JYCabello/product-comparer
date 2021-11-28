@@ -58,5 +58,5 @@ asyncResult {
 }
 |> Async.RunSynchronously
 |> function
-  | Ok _ -> ()
+  | Ok _ -> printfn "Finalizado"
   | Error err -> handler err

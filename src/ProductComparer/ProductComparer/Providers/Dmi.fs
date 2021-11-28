@@ -55,6 +55,7 @@ let getProduct (node: XmlNode) : ProviderProduct option =
 
 [<Literal>]
 let cachedDmiFolder = "./cache/dmi"
+
 [<Literal>]
 let timestampFormat = "yyyyMMdd-HHmm"
 
@@ -63,24 +64,24 @@ let getCacheFileName () =
   |> sprintf "%s.json"
 
 let saveCache (result: CatalogoResponseCatalogoResult) =
-    try
-      let isError =
-        result.Any1.ChildNodes.Cast<XmlNode>()
-        |> Seq.head
-        |> fun n -> n.InnerText.StartsWith("Lo sentimos")
+  try
+    let isError =
+      result.Any1.ChildNodes.Cast<XmlNode>()
+      |> Seq.head
+      |> fun n -> n.InnerText.StartsWith("Lo sentimos")
 
-      match isError with
-      | true -> Async.singleton ()
-      | false ->
-          File.WriteAllTextAsync(
-            Path.Combine(cachedDmiFolder, getCacheFileName ()),
-            JsonConvert.SerializeObject result,
-            Encoding.UTF8,
-            Unchecked.defaultof<CancellationToken>
-          )
-          |> Async.AwaitTask
-    with
-    | _ -> Async.singleton ()
+    match isError with
+    | true -> Async.singleton ()
+    | false ->
+      File.WriteAllTextAsync(
+        Path.Combine(cachedDmiFolder, getCacheFileName ()),
+        JsonConvert.SerializeObject result,
+        Encoding.UTF8,
+        Unchecked.defaultof<CancellationToken>
+      )
+      |> Async.AwaitTask
+  with
+  | _ -> Async.singleton ()
 
 let private map (result: CatalogoResponseCatalogoResult) =
   try
@@ -95,7 +96,8 @@ let private map (result: CatalogoResponseCatalogoResult) =
 
 let private tryParse timestamp =
   try
-    Some <| DateTime.ParseExact(timestamp, timestampFormat, null :> IFormatProvider)
+    Some
+    <| DateTime.ParseExact(timestamp, timestampFormat, null :> IFormatProvider)
   with
   | _ -> None
 

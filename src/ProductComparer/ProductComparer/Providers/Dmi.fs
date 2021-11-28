@@ -116,7 +116,7 @@ let private getFromCache shouldGetOld =
 
       let! validFile =
         match (DateTime.Now - dateTime) with
-        | diff when diff.Hours < 6 || shouldGetOld -> Some file
+        | diff when diff.Hours < 3 || shouldGetOld -> Some file
         | _ -> None
 
       let! json = File.ReadAllTextAsync(validFile, Encoding.UTF8, Unchecked.defaultof<CancellationToken>)
